@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Recipe Detail</title>
+</head>
+
+<body>
+    {% for recipe in recipes %}
+    <h1>{{ recipe.title }}</h1>
+    <p>
+        <strong>Chef Extraordinaire:</strong>
+        <a href="/author/{{ recipe.author_id }}">{{ recipe.author }}</a>
+    </p>
+    <p><strong>Description:</strong> {{ recipe.description }}</p>
+    <p><strong>Time:</strong> {{ recipe.time_req }}</p>
+
+    <p><strong>Instructions:</strong></p>
+    <ol>
+        {% for instruction in instructions %}
+        <li>{{ instruction }}</li>
+        {% endfor %}
+    </ol>
+    {% endfor %}
+
+    <a href="/">Go Home</a>
+</body>
+
+</html>

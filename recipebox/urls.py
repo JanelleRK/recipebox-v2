@@ -17,10 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from recipebox.models import Author
 from recipebox.models import Recipes
+from recipebox.views import (
+    list_view, author_detail, recipe_detail)
 
 admin.site.register(Author)
 admin.site.register(Recipes)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", list_view),
+    path("author/<int:id>", author_detail),
+    path("recipes/<int:id>", recipe_detail)
 ]
