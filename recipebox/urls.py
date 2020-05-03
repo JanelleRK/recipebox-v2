@@ -15,6 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from recipebox.models import Author
+from recipebox.models import Recipes
+
+admin.site.register(Author)
+admin.site.register(Recipes)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
