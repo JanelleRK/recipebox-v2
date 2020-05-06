@@ -1,0 +1,10 @@
+<h1>Add an Author</h1>
+<br />
+<form action="/addauthor/" method="post">
+    {% csrf_token%}
+    {{ form.as_p }}
+    <div>
+        <input type="submit" value="Add Author" id="button" />
+    </div>
+</form>
+<a href="/">Go Home</a>

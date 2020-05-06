@@ -1,0 +1,10 @@
+<h1>Add a Recipe</h1>
+<br>
+<form action="/addrecipe/" method="post">
+    {% csrf_token%}
+    {{ form.as_p }}
+    <div>
+        <input type="submit" value="Add Recipe" id="button" />
+    </div>
+</form>
+<a href="/">Go Home</a>

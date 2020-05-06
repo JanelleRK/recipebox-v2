@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from recipebox.models import Recipes, Author
-
+from recipebox.forms import AddAuthorForm, AddRecipeForm
+from django.shortcuts import redirect
 
 def list_view(request):
     html = "list_view.html"
@@ -21,3 +22,42 @@ def author_detail(request, id):
     authors = Author.objects.all().filter(id=id)
     items = Recipes.objects.all().filter(author_id=id)
     return render(request, html, {"authors": authors, "recipes": items})
+
+
+def add_author(request):
+    html = "add_author.html"
+    form = None
+    if request.method == "POST":
+        form = AddAuthorForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Author.objects.create(
+                name=data["name"],
+                bio=data["bio"]
+            )
+            return redirect('/')
+        # return render(request, "author_added.html")
+    else:
+        form = AddAuthorForm()
+    return render(request, html, {"form": form})
+
+
+def add_recipe(request):
+    html = "add_recipe.html"
+    form = None
+    if request.method == "POST":
+        form = AddRecipeForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Recipes.objects.create(
+                title=data["title"],
+                author=data["author"],
+                description=data["description"],
+                time_req=data["time_req"],
+                instructions=data["instructions"],
+            )
+            return redirect('/')
+        # return render(request, "recipe_added.html")
+    else:
+        form = AddRecipeForm()
+    return render(request, html, {"form": form})
