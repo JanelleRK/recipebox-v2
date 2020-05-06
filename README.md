@@ -1,72 +1,38 @@
-# Welcome to Django! RecipeBox V1
+# Django Recipebox: Forms!
 
-## Introduction
+Welcome to forms in Django!
 
-Django is the most popular Python web framework for making user-facing applications, and it's easy to see why. With the famous tagline of "batteries included" and thousands of plugins on PyPI, it makes sense that you can find it in a lot of platforms.
+There's a lot of fun to be had with forms, and thankfully Django takes a lot of the pain and agony away when trying to get data into our application. The video that we took this morning is below, and you can find documentation for what we covered here: [https://docs.djangoproject.com/en/3.0/topics/forms/#building-a-form-in-django] (Links to an external site.)Links to an external site.
 
-- The entirety of Instagram is a single monolithic Django app; as of 2016, they leveraged over 50k instances of their software on over 12k machines
-- The grand majority of the Washington Post
-- Most of USA Today and accompanying sites
-- All of Mozilla's support / documentation sites (all that Javascript documentation you were reading a few months ago? That was Django talking!)
-- Disqus comments; the plug-and-play comment system is the most popular system of its type, and it's one giant Django app
-- Most of Atlassian Bitbucket, a competitor to GitHub and Gitlab
-- The entirety of Eventbrite
-- The question-and-answer site Quora
+Before beginning, make sure you create a new branch off of your local master of recipebox. A good name for your branch may be `dev/forms`.
 
-Most of these won't advertise that they're looking for "django developers" because they want to make sure that people can work with their stack; instead, they'll focus on finding "python developers". It's up to us to learn how to leverage Django and its vast ecosystem to handle different types of applications.
+Now it's time to build some forms the Django way.
 
----
+Your Task
+Make two new html pages for our recipe application: one to add recipes, and one to add authors.
+The Django templating language will dynamically render your HTML.
+Resource --> [https://docs.djangoproject.com/en/3.0/topics/forms/#the-template] (Links to an external site.)Links to an external site. (note: you will need to make adjustments to the code in the documentation. It will not work without modification).
+Make two form classes (contained within forms.py):
+These form classes serve as an abstraction of the html form that we will serve to the user in order to receive data from said user.
+Your form classes should have the following names:
+AddAuthorForm
+has appropriate fields as derived from the Author model
+AddRecipeForm
+has appropriate fields as derived from the Recipe model
+Make sure your form classes you are inheriting from django.forms.Form.
+After submission, reroute the user to the home page of your application.
+Resource --> [https://docs.djangoproject.com/en/3.0/topics/forms/#more-on-fields] (Links to an external site.)Links to an external site.
+Make two new views:
+add_author 
+Uses your AddAuthorForm to create a new author.
+add_recipe
+Uses your AddRecipeForm to create a new recipe.
+Resource --> [https://docs.djangoproject.com/en/3.0/topics/forms/#the-view] (Links to an external site.)Links to an external site.
+Make two new endpoints in urls.py:
+addauthor/
+This will hook up to the view you wrote that uses AddAuthorForm.
+addrecipe/
+This will hook up to the view you wrote that uses AddRecipeForm.
+If you implement all the basic features and have the extra time, feel free to throw in some HTML / CSS and see how that influences your application. If you want to read more about serving static resources, the /static folder may be of some use to you. [https://docs.djangoproject.com/en/3.0/howto/static-files/] (Links to an external site.)Links to an external site.
 
-## Instructions
-
-
-For our introduction, we want to get familiar with creating a new Django application. Create a new application that serves recipes from different authors, much like our demo application does for news. Intended layout:
-
-- An index page that lists all titles of the loaded recipes (they don't have to be real recipes; just fill them with lorem ipsum and some numbers.)
-- Each title is a link that takes you to a single page with the content of that recipe.
-- Each detail view for a recipe has the author name.
-- Clicking on the author's name should take you to an Author Detail page, where you can see a list of all the recipes that Author has contributed to.
-- Make all of the models accessible by the Admin only.
-
-So we have three types of pages: a simple list view, a recipe detail view, and an author detail view. The admin panel will handle the creation views, so we don't need to worry too much about that.
-
-### Important Info:
-
-- Python 3.7, latest version of Django (2.1.2 as of this writing)
-- Start a project with `django-admin startproject {project name}` (for example, `django-admin startproject recipebook`)
-- Start the server with `python manage.py runserver`
-- After you create your models, run `python manage.py makemigrations {foldername}` (where foldername is the top level folder for your project) to create them, then `python manage.py migrate` to push them to the db. If you get stuck, delete the db and run the command again
-- If you change your models after running the migrations, run makemigrations and migrate again. If the migrations require the creation of a new table, django will attempt to automatically handle it; if things to weird, `python manage.py migrate --run-syncdb` is your friend
-- Create an admin user by running `python manage.py createsuperuser`
-- Don't go crazy on the front end. The goal is to just handle the database interactions and basic view path
-- Make sure that every detail page (author and recipe) has its own unique URL. If you reload the URL, the same page should appear -- no modals or manipulating the current information on the page. That's too complicated for what we're trying to achieve.
-- REITERATING: There are no extra points for pretty HTML! Don't spend time making everything on the front end look gorgeous; we just want to make sure we're serving the right information.
-
-### Author model:
-
-- Name
-- User backend (OnetoOne relationship against the Django user)
-- Brief Bio section (`TextField`)
-
-### Recipe Model:
-
-- Title
-- Author (ForeignKey)
-- Description
-- Time Required
-- Instructions (`TextField`)
-
-If you have any questions or get stuck at any point, don't hesitate to ask. Welcome to a new side of web development! Push up your code to a repo and submit the link to the repo.
-
----
-
-### Rubric
-
-1. Uses a `models.py` file to contain all database models
-2. Uses a `views.py` file to contain all renderable views
-3. Does not contain any logic in `models.py`
-4. Uses Django template language to create the three primary html files
-5. Clicking on a recipe title takes you to the recipe detail page, and clicking on the author name takes you to the author detail page
-6. The main page only contains recipe titles
-7. The author detail page contains a list of links to all recipes published by that author
-8. All models are manipulated from the built-in django admin page
+Demo Video: [https://s3.us-east-2.amazonaws.com/videos.kenzie.academy/Software+Engineering+-+Python/2020-2-3+--+Django+Forms.mp4] (Links to an external site.)Links to an external site.
