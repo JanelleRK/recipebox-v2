@@ -13,21 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
 from recipebox.models import Author
 from recipebox.models import Recipes
+from django.contrib import admin
+from django.urls import path
 from recipebox.views import (
-    list_view, author_detail, recipe_detail, add_author, add_recipe)
+    list_view, login_view, logout_action, author_detail, recipe_detail, 
+    add_author, add_recipe)
 
 admin.site.register(Author)
 admin.site.register(Recipes)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", list_view),
+    path("", list_view, name='homepage'),
+    path("login/", login_view, name="login"),
+    path("logout/", logout_action, name="logout"),
     path("author/<int:id>/", author_detail),
     path("recipes/<int:id>/", recipe_detail),
     path("addauthor/", add_author),
-    path("addrecipe/", add_recipe)
+    path("addrecipe/", add_recipe),
 ]
